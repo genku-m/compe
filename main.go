@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/genku-m/competition_file_generator/generator"
+	"github.com/genku-m/compe/generator"
 	"github.com/urfave/cli"
 )
 
