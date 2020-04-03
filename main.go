@@ -10,14 +10,14 @@ import (
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "competition_file_generator"
-	app.Usage = "this generator take a name and generate a file"
+	app.Name = "competition_tools"
+	app.Usage = "for competition tools"
 	app.Version = "0.0.1"
 
 	app.Commands = []cli.Command{
 		{
-			Name:  "compeg",
-			Usage: "compeg [title]",
+			Name:  "generate, g",
+			Usage: "generate [title]",
 			Flags: []cli.Flag{
 				cli.StringFlag{
 					Name:  "name, n",
