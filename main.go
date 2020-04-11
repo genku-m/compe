@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/genku-m/compe/generator"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 func main() {
@@ -22,14 +22,16 @@ func main() {
 			Usage:   "generate [title]",
 			Flags: []cli.Flag{
 				&cli.StringFlag{
-					Name:  "name, n",
-					Value: "atcoder",
-					Usage: "generate file for atcoder",
+					Name:    "name",
+					Aliases: []string{"n"},
+					Value:   "atcoder",
+					Usage:   "generate file for atcoder",
 				},
 				&cli.StringFlag{
-					Name:  "type, t",
-					Value: "abc",
-					Usage: "generate file for atcoder abc",
+					Name:    "type",
+					Aliases: []string{"t"},
+					Value:   "abc",
+					Usage:   "generate file for atcoder abc",
 				},
 			},
 			Action: func(c *cli.Context) error {
