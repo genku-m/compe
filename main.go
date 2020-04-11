@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 
@@ -14,43 +15,41 @@ func main() {
 	app.Usage = "for competition tools"
 	app.Version = "0.0.1"
 
-	app.Commands = []cli.Command{
+	app.Commands = []*cli.Command{
 		{
-			Name:  "generate, g",
-			Usage: "generate [title]",
+			Name:    "generate",
+			Aliases: []string{"g"},
+			Usage:   "generate [title]",
 			Flags: []cli.Flag{
-				cli.StringFlag{
+				&cli.StringFlag{
 					Name:  "name, n",
 					Value: "atcoder",
 					Usage: "generate file for atcoder",
 				},
-				cli.StringFlag{
+				&cli.StringFlag{
 					Name:  "type, t",
 					Value: "abc",
 					Usage: "generate file for atcoder abc",
 				},
 			},
-			Action: func(c *cli.Context) {
+			Action: func(c *cli.Context) error {
 				competition := c.String("name")
 				ctype := c.String("type")
 				title := c.Args().First()
 				if title == "" {
-					fmt.Println("title is empty")
-					return
+					return errors.New("title is empty")
 				}
 				g, err := generator.NewGenerator(competition, ctype, title)
 				if err != nil {
-					fmt.Println(err.Error())
-					return
+					return err
 				}
 
 				if err = g.Generate(); err != nil {
-					fmt.Println(err.Error())
-					return
+					return err
 				}
 
 				fmt.Printf("generate file for %s %s %s", competition, ctype, title)
-				return
+				return nil
 			},
 		},
 	}
